@@ -26,19 +26,19 @@ resource "aws_s3_bucket_ownership_controls" "website_bucket" {
 resource "aws_s3_bucket_public_access_block" "website_bucket" {
   bucket = aws_s3_bucket.website_bucket.id
 
-  block_public_acls       = true
+  block_public_acls       = false
   # Evita que se apliquen ACLs públicas (Access Control Lists) a objetos o al bucket.
-  block_public_policy     = true
+  block_public_policy     = false
   # Bloquea políticas de bucket que permitan acceso público.
-  ignore_public_acls      = true
+  ignore_public_acls      = false
   # Ignora cualquier ACL pública existente en objetos.
-  restrict_public_buckets = true
+  restrict_public_buckets = false
   # Restringe el acceso a buckets con políticas públicas.
 }
 # aws_s3_bucket_public_access_block Para buscar la documentación oficial de este recurso
 # visita: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block
 
-
+##########################################BORRARLO DESPUES (Pruebas))###############################################
 # Configuracion S3 bucket ACL
 resource "aws_s3_bucket_acl" "website_bucket" {
   # Garantiza que antes de aplicar la ACL, Terraform ya haya creado y configurado
