@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "website_bucket" {
     Name        = "My Website Bucket"
     Environment = "Dev"
   }
-
+}
 # Configuracion S3 bucket ownership controls
 # aws_s3_bucket_ownership_controls Para buscar la documentación oficial de este recurso
 # visita: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls
