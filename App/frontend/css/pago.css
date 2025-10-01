@@ -1,0 +1,54 @@
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: auto;
+  background-color: #111;
+  color: #eee;
+  padding: 20px;
+}
+
+form {
+  margin-top: 20px;
+  background-color: #222;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+input, select, button {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #888;
+}
+
+ul {
+  margin-top: 10px;
+}
+.btn-atras {
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-atras:hover {
+  background-color: #ddd;
+}

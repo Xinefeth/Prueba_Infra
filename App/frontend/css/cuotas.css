@@ -1,0 +1,135 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Requisito 5: Cuotas atrasadas del mes actual => rojo */
+tr.atrasado {
+  background-color: #ffdddd;
+  color: #a60000;
+  font-weight: bold;
+}
+
+/* Requisito 6: Cuotas que vencen en la semana => amarillo */
+tr.porVencer {
+  background-color: #fff8c4;
+  font-weight: bold;
+}
+
+/* Requisito 7: Cuotas que vencen hoy => alerta */
+tr.hoy {
+  background-color: #ffbaba;
+  font-weight: bold;
+  animation: parpadeo 1s infinite;
+}
+
+/* Opcional: pagadas del mes actual desactivadas */
+tr.pagado {
+  background-color: #e6f0e6;
+  color: #888;
+}
+
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-pagar {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-pagar:hover {
+  background-color: #45a049;
+}
+
+.btn-disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Modal */
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none; /* Oculto por defecto */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  z-index: 1001;
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* Estilo para cuotas que vencen hoy */
+.hoy {
+  font-weight: bold;
+  animation: parpadeo 1s infinite alternate;
+}
+
+/* Animación de parpadeo */
+@keyframes parpadeo {
+  from {
+    background-color: #fff3cd; /* Amarillo suave */
+    color: black;
+  }
+  to {
+    background-color: #f8d7da; /* Rojo claro */
+    color: darkred;
+  }
+}

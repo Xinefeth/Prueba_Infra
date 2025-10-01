@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Cuotas</title>
+  <script>
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      window.location.href = "login.html";
+    }
+  </script>
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+<button onclick="window.location.href='inicio.html'" class="btn-atras">← Atrás</button>
+<body>
+  <h1>Cuotas del Cliente</h1>
+
+  <div class="filtros">
+    <label>Filtrar por:</label>
+    <select id="filtroFecha">
+      <option value="todas">Todas</option>
+      <option value="hoy">Vencen Hoy</option>
+      <option value="semana">Esta Semana</option>
+      <option value="mes">Este Mes</option>
+      <option value="anio">Este Año</option>
+    </select>
+  </div>
+
+  <div id="tablaCuotas"></div>
+  <div id="paginacion" class="paginacion"></div>
+
+
+  <script src="../js/index.js"></script>
+</body>
+</html>

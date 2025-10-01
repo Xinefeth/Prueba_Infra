@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Configuracion</title>
+  <script>
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      window.location.href = "login.html";
+    }
+  </script>
+  <link rel="stylesheet" href="../css/inicio.css" />
+  <link rel="stylesheet" href="../css/configuracion.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- Menú lateral compartido -->
+    <aside class="sidebar">
+      <h2 class="logo">Préstamos Castillo</h2>
+      <nav>
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="historial.html">Historial</a></li>
+          <li class="active"><a href="configuracion.html">Configuraciones</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+        <!-- Contenido principal -->
+        <main class="main">
+            <h1>Configuración</h1>
+            
+            <section class="config-section">
+                <h2>👤 Cambiar nombre de usuario</h2>
+                <label for="nuevo-usuario">Usuario</label>
+                <input type="text" id="nuevo-usuario" name="nuevo-usuario" placeholder="Nuevo nombre de usuario">
+                <button onclick="cambiarUsuario()">Aceptar cambios</button>
+              </section>
+
+              <section class="config-section">
+                <h2>Cambiar contraseña</h2>
+                
+                <label for="nueva-contrasena">Nueva contraseña</label>
+                <input type="password" id="nueva-contrasena" name="nueva-contrasena" placeholder="Escribe la nueva contraseña">
+                
+                <label for="confirmar-contrasena">Confirmar nueva contraseña</label>
+                <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" placeholder="Confirma la nueva contraseña">
+            
+                <button onclick="cambiarContrasena()">Cambiar contraseña</button>
+              </section>
+        <script src="../js/configuracion.js"></script>
+      </body>
+      </html>

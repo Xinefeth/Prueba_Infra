@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Historial de Préstamos</title>
+
+  <script>
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <link rel="stylesheet" href="../css/inicio.css" />
+  <link rel="stylesheet" href="../css/historial.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- Menú lateral compartido -->
+    <aside class="sidebar">
+      <h2 class="logo">Préstamos Castillo</h2>
+      <nav>
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li class="active"><a href="historial.html">Historial</a></li>
+          <li><a href="configuracion.html">Configuraciones</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main">
+      <h1>Historial de Préstamos</h1>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>DNI/RUC</th>
+              <th>Nombre / Razón Social</th>
+              <th>Fecha</th>
+              <th>Monto</th>
+              <th>Cronograma</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-historial">
+            <!-- Datos cargados por JS -->
+          </tbody>
+        </table>
+
+        <div id="paginacion" class="pagination"></div>
+      </div>
+
+      <div class="paginacion">
+        <button id="anterior">Anterior</button>
+        <span id="pagina-actual">Página 1</span>
+        <button id="siguiente">Siguiente</button>
+      </div>
+    </main>
+  </div>
+  <!-- SCRIPT DE PAGINACIÓN Y VER CRONOGRAMA -->
+  <script>
+    const API_URL = "https://backpracticaagile.onrender.com/api";
+    let prestamos = [];
+    let paginaActual = 1;
+    const limitePorPagina = 20;
+
+    async function cargarHistorial() {
+      try {
+        const res = await fetch(`${API_URL}/prestamos/historial`);
+        if (!res.ok) throw new Error("No se pudo cargar el historial.");
+        prestamos = await res.json();
+        mostrarPagina(paginaActual);
+      } catch (err) {
+        console.error("Error al cargar historial:", err.message);
+        document.getElementById("tabla-historial").innerHTML =
+          `<tr><td colspan="6">Error al cargar historial.</td></tr>`;
+      }
+    }
+
+    function mostrarPagina(pagina) {
+      const inicio = (pagina - 1) * limitePorPagina;
+      const fin = inicio + limitePorPagina;
+      const prestamosPagina = prestamos.slice(inicio, fin);
+
+      const tbody = document.getElementById("tabla-historial");
+      tbody.innerHTML = "";
+
+      if (prestamosPagina.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6">No hay préstamos registrados.</td></tr>`;
+        return;
+      }
+
+      prestamosPagina.forEach(prestamo => {
+        const fila = `
+          <tr>
+            <td>${prestamo.id}</td>
+            <td>${prestamo.dniRuc || prestamo.cliente?.dniRuc}</td>
+            <td>${prestamo.nombre || prestamo.cliente?.nombre}</td>
+            <td>${prestamo.fecha}</td>
+            <td>S/ ${prestamo.monto}</td>
+            <td><button onclick="verCronograma(${prestamo.id})">📄 Ver</button></td>
+          </tr>
+        `;
+        tbody.innerHTML += fila;
+      });
+
+      document.getElementById("pagina-actual").textContent = `Página ${paginaActual}`;
+
+      // Activar/desactivar botones de paginación
+      document.getElementById("anterior").disabled = paginaActual === 1;
+      document.getElementById("siguiente").disabled = paginaActual * limitePorPagina >= prestamos.length;
+    }
+
+    function verCronograma(prestamoId) {
+      window.open(`${API_URL}/cronograma/descargar/${prestamoId}`, "_blank");
+    }
+
+    document.getElementById("siguiente").addEventListener("click", () => {
+      if (paginaActual * limitePorPagina < prestamos.length) {
+        paginaActual++;
+        mostrarPagina(paginaActual);
+      }
+    });
+
+    document.getElementById("anterior").addEventListener("click", () => {
+      if (paginaActual > 1) {
+        paginaActual--;
+        mostrarPagina(paginaActual);
+      }
+    });
+
+    cargarHistorial();
+  </script>
+</body>
+</html>

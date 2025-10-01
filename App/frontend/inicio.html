@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - Registro de Préstamo</title>
+
+    <script>
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <link rel="stylesheet" href="../css/inicio.css">
+</head>
+
+<body>
+  <div class="layout">
+    <!-- Menú lateral -->
+    <aside class="sidebar">
+      <h2 class="logo">Préstamos Castillo</h2>
+      <nav>
+        <ul>
+          <li class="active"><a href="inicio.html">Inicio</a></li>
+          <li><a href="historial.html">Historial</a></li>
+          <li><a href="configuracion.html">Configuraciones</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Registrar Préstamo</h1>
+        <a href="index.html" class="btn-cuotas" style="
+          background-color: #3498db;
+          color: white;
+          padding: 8px 16px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+        ">CUOTAS</a>
+      </div>
+
+
+      <div class="card">
+        <!-- Buscar cliente -->
+        <div class="form-section">
+          <label for="tipo-doc">Tipo de documento</label>
+          <select id="tipo-doc">
+            <option value="DNI">DNI</option>
+            <option value="RUC">RUC</option>
+          </select>
+
+          <label for="numero-doc">Número</label>
+          <div class="inline-group">
+            <input type="text" id="numero-doc" placeholder="Ingrese número" />
+            <button id="consultar-btn">Consultar</button>
+          </div>
+
+          <!-- Dentro de tu archivo HTML existente -->
+          <div id="datos-cliente">
+            <label for="nombre">Nombre / Razón Social</label>
+            <input type="text" id="nombre" readonly />
+
+            <div id="ruc-extra" style="display: none;">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" readonly />
+            </div>
+          </div>
+
+        <!-- Registro de préstamo -->
+        <div class="form-section">
+          <label for="monto">Monto del préstamo</label>
+          <input type="number" id="monto" placeholder="Ej: 4500.00" min="1" max="19000" />
+
+          <label for="cuotas">Cantidad de meses (cuotas)</label>
+          <input type="number" id="cuotas" placeholder="Ej: 12" min="1" max="36" />
+
+          <label for="fecha">Fecha del préstamo</label>
+          <input type="date" id="fecha" />
+
+          <div class="btn-group">
+            <button id="registrar-btn">Registrar préstamo</button>
+            <button id="generar-cronograma-btn" class="secondary">Generar cronograma</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+          window.addEventListener("DOMContentLoaded", () => {
+            const fechaInput = document.getElementById("fecha-emision");
+            const hoy = new Date().toISOString().split("T")[0];
+            fechaInput.setAttribute("min", hoy);
+            fechaInput.value = hoy;
+            });
+          </script>
+          
+  <script src="../js/inicio.js"></script>
+
+    <!-- Botón de cerrar sesión -->
+  <button id="cerrar-sesion-btn" style="
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+  ">Cerrar sesión</button>
+
+  <script src="../js/inicio.js"></script>
+  <script>
+    document.getElementById("cerrar-sesion-btn").addEventListener("click", () => {
+      sessionStorage.removeItem("token");
+      window.location.href = "login.html";
+    });
+  </script>
+  <script>
+  const tipoDoc = document.getElementById("tipo-doc");
+  const numeroDoc = document.getElementById("numero-doc");
+  const btnConsultar = document.getElementById("consultar-btn");
+
+  // Función para validar y habilitar/deshabilitar el botón
+  function validarNumero() {
+    const tipo = tipoDoc.value;
+    const valor = numeroDoc.value.trim();
+    const longitudEsperada = tipo === "DNI" ? 8 : 11;
+
+    // Habilitar si longitud exacta, sino deshabilitar
+    btnConsultar.disabled = valor.length === longitudEsperada ? false : true;
+  }
+
+  // Actualiza maxlength y placeholder según tipo
+  tipoDoc.addEventListener("change", () => {
+    if (tipoDoc.value === "DNI") {
+      numeroDoc.maxLength = 8;
+      numeroDoc.placeholder = "Ingrese 8 dígitos";
+    } else if (tipoDoc.value === "RUC") {
+      numeroDoc.maxLength = 11;
+      numeroDoc.placeholder = "Ingrese 11 dígitos";
+    }
+    numeroDoc.value = "";
+    btnConsultar.disabled = true;
+  });
+
+  // Solo permite números y actualiza la validación
+  numeroDoc.addEventListener("input", () => {
+    numeroDoc.value = numeroDoc.value.replace(/\D/g, ""); // elimina no numéricos
+    validarNumero(); // valida longitud correcta
+  });
+
+  // Inicialización al cargar
+  window.addEventListener("DOMContentLoaded", () => {
+    tipoDoc.dispatchEvent(new Event("change")); // forzar setup inicial
+  });
+</script>
+
+</body>
+
+</body>
+</html>

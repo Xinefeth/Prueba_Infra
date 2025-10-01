@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Bienvenido</h2>
+        <h2>Prestamos Castillo</h2>
+        <form id="login-form" class="form-login">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" placeholder="Ingresa tu usuario" required />
+      
+          <label for="clave">Contraseña</label>
+          <div style="position: relative;">
+          <input type="password" id="clave" placeholder="Ingresa tu contraseña" required />
+          <span id="toggle-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+             👁️
+          </span>
+          <button type="submit">Ingresar</button>
+        </form>
+      </div>
+      
+    <script>
+    // Mostrar/ocultar contraseña
+    document.getElementById('toggle-password').addEventListener('click', function () {
+      const claveInput = document.getElementById('clave');
+      const tipo = claveInput.getAttribute('type');
+      claveInput.setAttribute('type', tipo === 'password' ? 'text' : 'password');
+      this.textContent = tipo === 'password' ? '🙈' : '👁️';
+    });
+  </script>
+  
+  <script src="../js/login.js"></script>
+</body>
+</html>

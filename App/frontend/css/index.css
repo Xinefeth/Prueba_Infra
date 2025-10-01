@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f8f8f8;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+tr.pagado {
+  background-color: #e0e0e0;
+  color: #999;
+}
+
+tr.muy-atrasada {
+  background-color: #ffdddd;
+  color: #b30000;
+}
+
+tr.semana {
+  background-color: #fffacc;
+}
+
+tr.hoy {
+  background-color: #ffcc00;
+  animation: parpadeo 1s infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% { background-color: #ffcc00; }
+  50% { background-color: #ffe680; }
+}
+
+.filtros {
+  margin-bottom: 10px;
+}
+.btn-atras {
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-atras:hover {
+  background-color: #ddd;
+}
+tr.atrasada {
+  background-color: #d9534f;
+  color: white;
+  font-weight: bold;
+}

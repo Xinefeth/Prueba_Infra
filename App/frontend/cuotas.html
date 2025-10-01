@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Cuotas</title>
+  <link rel="stylesheet" href="../css/cuotas.css">
+</head>
+<body>
+  <h1>Gestión de Cuotas</h1>
+
+  <table id="tablaCuotas">
+    <thead>
+      <tr>
+        <th>N° Cuota</th>
+        <th>Fecha de Pago</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Modal -->
+  <div id="modal" class="hidden">
+    <div class="modal-content">
+      <h3>Resumen del Comprobante</h3>
+      <pre id="comprobanteResumen"></pre>
+      <button id="descargarBtn">Descargar Comprobante</button>
+      <button onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="../js/cuotas.js"></script>
+</body>
+</html>

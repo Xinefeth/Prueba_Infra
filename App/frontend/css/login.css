@@ -1,0 +1,98 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Contenedor principal */
+  .login-container {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+  }
+  
+  /* Título */
+  .login-container h2 {
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  /* Formulario */
+  .form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  /* Etiquetas */
+  .form-login label {
+    text-align: left;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    margin-top: 12px;
+    color: #444;
+  }
+  
+  /* Inputs */
+  .form-login input {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-login input:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  /* Enlace recuperar contraseña */
+  .recuperar-link {
+    margin: 10px 0;
+  }
+  
+  .recuperar-link a {
+    font-size: 0.88rem;
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .recuperar-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  /* Botón */
+  .form-login button {
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-login button:hover {
+    background-color: #0056b3;
+  }
+  
