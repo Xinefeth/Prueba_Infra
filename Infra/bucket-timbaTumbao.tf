@@ -56,3 +56,29 @@ resource "aws_s3_bucket_acl" "website_bucket" {
 
 # aws_s3_bucket_public_access_block Para buscar la documentación oficial de este recurso
 # visita: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
+
+# Subida de archivos estáticos del frontend al bucket S3
+resource "aws_s3_object" "website_bucket" {
+  for_each = fileset("${path.module}/../frontend", "**/*")
+
+  bucket = aws_s3_bucket.website_bucket.bucket
+  key    = each.value
+  source = "${path.module}/../frontend/${each.value}"
+  etag   = filemd5("${path.module}/../frontend/${each.value}")
+
+  # Detecta y asigna automáticamente el content-type según la extensión
+  content_type = lookup(
+    {
+      html = "text/html"
+      css  = "text/css"
+      js   = "application/javascript"
+      png  = "image/png"
+      jpg  = "image/jpeg"
+      jpeg = "image/jpeg"
+      svg  = "image/svg+xml"
+    },
+    regex("\\.(\\w+)$", each.value)[0],
+    "application/octet-stream"
+  )
+}
+
